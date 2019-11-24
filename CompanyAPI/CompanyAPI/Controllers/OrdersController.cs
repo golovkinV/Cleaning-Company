@@ -14,44 +14,48 @@ using System.Web.Http.Cors;
 namespace CompanyAPI.Controllers
 {
     [EnableCors(origins: "http://cleanandcode.somee.com", headers: "*", methods: "*")]
-    public class ServicesController : ApiController
+    public class OrdersController : ApiController
     {
         private CompanyContext db = new CompanyContext();
 
-        // GET: api/Services
-        public IQueryable<Service> GetServices()
+        // GET: api/Orders
+        public IQueryable<Order> GetOrders()
         {
-            return db.Services;
+            return db.Orders.Include(o => o.Service);
         }
 
-        // GET: api/Services/5
-        [ResponseType(typeof(Service))]
-        public IHttpActionResult GetService(int id)
+        // GET: api/Orders/5
+        [ResponseType(typeof(Order))]
+        public IHttpActionResult GetOrder(int id)
         {
-            Service service = db.Services.Find(id);
-            if (service == null)
+            Order order = db.Orders
+                .Where(o => o.Id == id)
+                .Include(o => o.Service)
+                .FirstOrDefault();
+
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return Ok(service);
+            return Ok(order);
         }
 
-        // PUT: api/Services/5
+        // PUT: api/Orders/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutService(int id, Service service)
+        public IHttpActionResult PutOrder(int id, Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != service.Id)
+            if (id != order.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(service).State = EntityState.Modified;
+            db.Entry(order).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +63,7 @@ namespace CompanyAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ServiceExists(id))
+                if (!OrderExists(id))
                 {
                     return NotFound();
                 }
@@ -72,35 +76,35 @@ namespace CompanyAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Services
-        [ResponseType(typeof(Service))]
-        public IHttpActionResult PostService(Service service)
+        // POST: api/Orders
+        [ResponseType(typeof(Order))]
+        public IHttpActionResult PostOrder(Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Services.Add(service);
+            db.Orders.Add(order);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = service.Id }, service);
+            return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
         }
 
-        // DELETE: api/Services/5
-        [ResponseType(typeof(Service))]
-        public IHttpActionResult DeleteService(int id)
+        // DELETE: api/Orders/5
+        [ResponseType(typeof(Order))]
+        public IHttpActionResult DeleteOrder(int id)
         {
-            Service service = db.Services.Find(id);
-            if (service == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            db.Services.Remove(service);
+            db.Orders.Remove(order);
             db.SaveChanges();
 
-            return Ok(service);
+            return Ok(order);
         }
 
         protected override void Dispose(bool disposing)
@@ -112,9 +116,9 @@ namespace CompanyAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ServiceExists(int id)
+        private bool OrderExists(int id)
         {
-            return db.Services.Count(e => e.Id == id) > 0;
+            return db.Orders.Count(e => e.Id == id) > 0;
         }
     }
 }

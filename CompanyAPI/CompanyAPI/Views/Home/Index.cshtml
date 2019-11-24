@@ -26,8 +26,8 @@
 </div>
 
 <div>
-    <label>Имя</label><br />
-    <input type="text" id="first_name" /> <br /><br />
+    <label>Название</label><br />
+    <input type="text" id="service_name" /> <br /><br />
     <label>Фамилия</label><br />
     <input type="text" id="second_name" /> <br /><br />
     <label>Отчество</label><br />
@@ -48,26 +48,20 @@
         $('#submit').click(function (e) {
             e.preventDefault();
             var data = {
-                firstName: $('#first_name').val(),
-                secondName: $('#second_name').val(),
-                patronymic: $('#patronymic').val(),
-                phone: $('#phone').val(),
-                email: $('#email').val(),
-                password: $('#password').val(),
-                confirmPassword: $('#confirmpassword').val()
+                Name: $('#service_name').val()
             };
 
             $.ajax({
                 type: 'POST',
-                url: '/api/Account/Register',
+                url: '/api/services',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data),
                 success: function (data) {
-                    alert("Регистрация пройдена");
+                    alert("Услуга добавлена");
                 },
                 error: function (x, y, z) {
                    
-                    alert("В процесе регистрации возникла ошибка");
+                    alert("В процесе возникла ошибка");
                 }
             });
         });
