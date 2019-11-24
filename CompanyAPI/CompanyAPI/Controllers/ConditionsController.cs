@@ -13,51 +13,44 @@ using System.Web.Http.Cors;
 
 namespace CompanyAPI.Controllers
 {
-    public class OrdersController : ApiController
+    public class ConditionsController : ApiController
     {
         private CompanyContext db = new CompanyContext();
 
-        // GET: api/Orders
-        public IQueryable<Order> GetOrders()
+        // GET: api/Conditions
+        public IQueryable<Condition> GetConditions()
         {
-            return db.Orders
-                .Include(o => o.Service)
-                .Include(o => o.Condition);
+            return db.Conditions;
         }
 
-        // GET: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult GetOrder(int id)
+        // GET: api/Conditions/5
+        [ResponseType(typeof(Condition))]
+        public IHttpActionResult GetCondition(int id)
         {
-            Order order = db.Orders
-                .Where(o => o.Id == id)
-                .Include(o => o.Service)
-                .Include(o => o.Condition)
-                .FirstOrDefault();
-
-            if (order == null)
+            Condition condition = db.Conditions.Find(id);
+            if (condition == null)
             {
                 return NotFound();
             }
 
-            return Ok(order);
+            return Ok(condition);
         }
 
-        // PUT: api/Orders/5
+        // PUT: api/Conditions/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutOrder(int id, Order order)
+        public IHttpActionResult PutCondition(int id, Condition condition)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != order.Id)
+            if (id != condition.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(order).State = EntityState.Modified;
+            db.Entry(condition).State = EntityState.Modified;
 
             try
             {
@@ -65,7 +58,7 @@ namespace CompanyAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(id))
+                if (!ConditionExists(id))
                 {
                     return NotFound();
                 }
@@ -78,35 +71,35 @@ namespace CompanyAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Orders
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult PostOrder(Order order)
+        // POST: api/Conditions
+        [ResponseType(typeof(Condition))]
+        public IHttpActionResult PostCondition(Condition condition)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Orders.Add(order);
+            db.Conditions.Add(condition);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
+            return CreatedAtRoute("DefaultApi", new { id = condition.Id }, condition);
         }
 
-        // DELETE: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult DeleteOrder(int id)
+        // DELETE: api/Conditions/5
+        [ResponseType(typeof(Condition))]
+        public IHttpActionResult DeleteCondition(int id)
         {
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            Condition condition = db.Conditions.Find(id);
+            if (condition == null)
             {
                 return NotFound();
             }
 
-            db.Orders.Remove(order);
+            db.Conditions.Remove(condition);
             db.SaveChanges();
 
-            return Ok(order);
+            return Ok(condition);
         }
 
         protected override void Dispose(bool disposing)
@@ -118,9 +111,9 @@ namespace CompanyAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OrderExists(int id)
+        private bool ConditionExists(int id)
         {
-            return db.Orders.Count(e => e.Id == id) > 0;
+            return db.Conditions.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -8,8 +8,9 @@ namespace CompanyAPI.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Service> Services { get; set; }
-        //public DbSet<StatusOrder> Statuses { get; set; }
+        public DbSet<Condition> Conditions { get; set; }
         public DbSet<Order> Orders { get; set; }
+
 
         public CompanyContext()
         {

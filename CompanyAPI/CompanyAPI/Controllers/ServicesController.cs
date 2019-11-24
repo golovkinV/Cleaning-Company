@@ -13,7 +13,6 @@ using System.Web.Http.Cors;
 
 namespace CompanyAPI.Controllers
 {
-    [EnableCors(origins: "http://cleanandcode.somee.com", headers: "*", methods: "*")]
     public class ServicesController : ApiController
     {
         private CompanyContext db = new CompanyContext();

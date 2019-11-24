@@ -8,7 +8,6 @@ namespace CompanyAPI.Models
     public class Order
     {
         public int Id { get; set; }
-        public int StatusId { get; set; }
         public int ClientId { get; set; }
         public int ManagerId { get; set; }
         public int CleanerId { get; set; }
@@ -18,6 +17,8 @@ namespace CompanyAPI.Models
 
         public int ServiceId { get; set; }
         public Service Service { get; set; }
-        //public StatusOrder Status { get; set; }
+
+        public int ConditionId { get; set; }
+        public Condition Condition { get; set; }
     }
 }
