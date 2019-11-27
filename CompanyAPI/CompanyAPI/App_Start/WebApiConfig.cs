@@ -15,7 +15,7 @@ namespace CompanyAPI
         public static void Register(HttpConfiguration config)
         {
             // Конфигурация и службы Web API
-            var cors = new EnableCorsAttribute("http://cleanandcode.somee.com/api", "*", "*");
+            var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
 
             // Настройка Web API для использования только проверки подлинности посредством маркера-носителя.
