@@ -87,6 +87,7 @@ namespace CompanyAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            var sendDate = order.Date;
             db.Orders.Add(order);
             db.SaveChanges();
 
