@@ -35,6 +35,22 @@ namespace CompanyAPI.Models
     public class RegisterBindingModel
     {
         [Required]
+        [Display(Name = "Имя")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Фамилия")]
+        public string SecondName { get; set; }
+
+        [Required]
+        [Display(Name = "Отчество")]
+        public string Patronymic { get; set; }
+
+        [Required]
+        [Display(Name = "Телефон")]
+        public string Phone { get; set; }
+
+        [Required]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
 

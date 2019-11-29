@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using CompanyAPI.Models;
 using CompanyAPI.Providers;
 using CompanyAPI.Results;
+using System.Linq;
 
 namespace CompanyAPI.Controllers
 {
@@ -30,6 +31,13 @@ namespace CompanyAPI.Controllers
         {
         }
 
+        public IQueryable<ApplicationUser> GetUsers()
+        {
+            var context = new ApplicationDbContext();
+            var users = context.Users;
+            return users;
+        }
+        
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
@@ -328,7 +336,15 @@ namespace CompanyAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() {
+                FirstName = model.FirstName,
+                SecondName = model.SecondName,
+                Patronymic = model.Patronymic, 
+                Phone = model.Phone,
+                UserName = model.Email,
+                Email = model.Email,
+                Role_id = 3
+            };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
