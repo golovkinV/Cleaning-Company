@@ -22,9 +22,6 @@ namespace CompanyAPI
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            // Получение данных в формате JSON
-            //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-
             // Маршруты Web API
             config.MapHttpAttributeRoutes();
 
@@ -34,6 +31,7 @@ namespace CompanyAPI
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            // Получение данных в формате JSON
             var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
             config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
         }

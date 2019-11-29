@@ -7,13 +7,14 @@ namespace CompanyAPI.Models
 {
     public static class EmailSender
     {
+        private static string companyName = "Clean and Code";
         private static string adminEmail = "cleanandcode@yandex.ru";
         private static string adminPassword = "shandao";
 
         public static void SendEmailAsync(string email, string subject, string message) {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("Clean and Code", adminEmail));
+            emailMessage.From.Add(new MailboxAddress(companyName, adminEmail));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
