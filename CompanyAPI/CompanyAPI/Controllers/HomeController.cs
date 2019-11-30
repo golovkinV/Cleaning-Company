@@ -13,8 +13,6 @@ namespace CompanyAPI.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            //EmailSheduler.Start();
-            //_ = EmailSender.SendEmailAsync("vladimir.golovkin16@yandex.ru", "Напоминание об уборке", "Будь дома 29.11.2019 в 18:30, мудила");
             return View();
         }
     }

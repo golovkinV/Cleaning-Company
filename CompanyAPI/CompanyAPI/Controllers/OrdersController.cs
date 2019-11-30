@@ -13,6 +13,7 @@ using System.Web.Http.Cors;
 
 namespace CompanyAPI.Controllers
 {
+    [RoutePrefix("api/orders")]
     public class OrdersController : ApiController
     {
         private CompanyContext db = new CompanyContext();
@@ -41,6 +42,32 @@ namespace CompanyAPI.Controllers
             }
 
             return Ok(order);
+        }
+
+        // GET: api/orders/client_orders/1
+        [HttpGet]
+        [Route("client_orders/{client_id}")]
+        public IQueryable<Order> ClientOrders(int client_id)
+        {
+            var orders = db.Orders
+                .Where(o => o.ClientId == client_id)
+                .Include(o => o.Service)
+                .Include(o => o.Condition);
+
+            return orders;
+        }
+
+        // GET: api/orders/cleaner_orders/1
+        [HttpGet]
+        [Route("cleaner_orders/{cleaner_id}")]
+        public IQueryable<Order> CleanerOrders(int cleaner_id)
+        {
+            var orders = db.Orders
+                .Where(o => o.CleanerId == cleaner_id)
+                .Include(o => o.Service)
+                .Include(o => o.Condition);
+
+            return orders;
         }
 
         // PUT: api/Orders/5
@@ -87,7 +114,6 @@ namespace CompanyAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var sendDate = order.Date;
             db.Orders.Add(order);
             db.SaveChanges();
 

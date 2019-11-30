@@ -11,7 +11,6 @@ namespace CompanyAPI.Models
         public DbSet<Condition> Conditions { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-
         public CompanyContext()
         {
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);

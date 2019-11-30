@@ -27,13 +27,13 @@
 
 <div>
     <label>Название</label><br />
-    <input type="text" id="service_name" /> <br /><br />
+    <input type="text" id="emailbr" /> <br /><br />
     <label>Фамилия</label><br />
     <input type="text" id="second_name" /> <br /><br />
     <label>Отчество</label><br />
-    <input type="text" id="patronymic" /> <br /><br />
+    <input type="text" id="Date" /> <br /><br />
     <label>Телефон</label><br />
-    <input type="text" id="phone" /> <br /><br />
+    <input type="text" id="Time" /> <br /><br />
     <label>Введите email</label><br />
     <input type="email" id="email" /> <br /><br />
     <label>Введите пароль</label><br />
@@ -48,19 +48,21 @@
         $('#submit').click(function (e) {
             e.preventDefault();
             var data = {
-                Name: $('#service_name').val()
+                ClientName: $('#second_name').val(),
+                Email: $('#emailbr').val(),
+                Date: $('#Date').val(),
+                Time: $('#Time').val()
             };
 
             $.ajax({
                 type: 'POST',
-                url: '/api/services',
+                url: '/api/email',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data),
                 success: function (data) {
-                    alert("Услуга добавлена");
+                    alert("Отправлено");
                 },
                 error: function (x, y, z) {
-                   
                     alert("В процесе возникла ошибка");
                 }
             });
