@@ -70,6 +70,17 @@ namespace CompanyAPI.Controllers
             return orders;
         }
 
+        [HttpGet]
+        [Route("manager_orders")]
+        public IQueryable<Order> ManagerOrders()
+        {
+            var orders = db.Orders
+                .Where(o => o.ConditionId == 4)
+                .Include(o => o.Service)
+                .Include(o => o.Condition);
+
+            return orders;
+        }
         // PUT: api/Orders/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutOrder(int id, Order order)

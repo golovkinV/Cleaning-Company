@@ -9,7 +9,6 @@ namespace CompanyAPI.Models
     {
         public int Id { get; set; }
         public int ClientId { get; set; }
-        public int ManagerId { get; set; }
         public int CleanerId { get; set; }
         public string Address { get; set; }
         public string Date { get; set; }
