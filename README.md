@@ -48,7 +48,7 @@
                          
       + DELETE-запрос: **/orders/{order_id}**
 
-2. Получение данных по **Услугам**
+2. Получение данных по **Услугам:**
 
       + GET-запросы: 
       
@@ -73,4 +73,41 @@
                          }
                          
       + DELETE-запрос: **/services/{service_id}**
+
+3. Получение данных по **Статусам заказа:**
+
+      + GET-запросы: 
       
+            1. Все статусы: /conditions
+            
+            2. Статус по id: /conditions/{condition_id}
+            
+      + POST-запросы: 
+      
+            1. Добавить новую услугу: /conditions       
+                  Модель object: 
+                        let data = {
+                              Name: "название"
+                         }
+
+      + PUT-запросы
+      
+            1. Редактировать услугу: /conditions/{condition_id}
+                  Модель object: 
+                        let data = {
+                              Name: "название"
+                         }
+                         
+      + DELETE-запрос: **/conditions/{condition_id}**
+      
+4. Отправка **Письма на почту клиента:**
+      + POST-запрос:
+            
+            1. Отправить письмо: /email
+                  Модель object: 
+                        let data = {
+                              ClientName: "ФИО",
+                              Email: "client@yandex.ru",
+                              Date: "01.01.1970",
+                              Time: "00:00"
+                        }
