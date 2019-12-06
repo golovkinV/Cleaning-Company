@@ -66,7 +66,7 @@
 
       + PUT-запросы
       
-            1. Редактировать услугу: /orders/{service_id}
+            1. Редактировать услугу: /services/{service_id}
                   Модель object: 
                         let data = {
                               Name: "название"
@@ -84,7 +84,7 @@
             
       + POST-запросы: 
       
-            1. Добавить новую услугу: /conditions       
+            1. Добавить новый статус: /conditions       
                   Модель object: 
                         let data = {
                               Name: "название"
@@ -92,7 +92,7 @@
 
       + PUT-запросы
       
-            1. Редактировать услугу: /conditions/{condition_id}
+            1. Редактировать статус: /conditions/{condition_id}
                   Модель object: 
                         let data = {
                               Name: "название"
