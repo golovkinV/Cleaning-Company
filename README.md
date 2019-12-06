@@ -46,7 +46,7 @@
                               ServiceId: 4
                          }
                          
-      + DELETE-запрос: /orders/{order_id}
+      + DELETE-запрос: **/orders/{order_id}**
 
 2. Получение данных по **Услугам**
 
@@ -68,10 +68,9 @@
       
             1. Редактировать услугу: /orders/{service_id}
                   Модель object: 
-                  Модель object: 
                         let data = {
                               Name: "название"
                          }
                          
-      + DELETE-запрос: /services/{service_id}
+      + DELETE-запрос: **/services/{service_id}**
       
