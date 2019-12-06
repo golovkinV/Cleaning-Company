@@ -12,7 +12,7 @@
       
             1. Все заказы: /orders
             
-            2. Заказ по id: /orders/1
+            2. Заказ по id: /orders/{order_id}
             
             3. Заказы клиента: /orders/client_orders/{client_id}
             
@@ -32,3 +32,46 @@
                               Time: "00:00",
                               ServiceId: 4
                          }
+
+      + PUT-запросы
+      
+            1. Редактировать заказ: /orders/{order_id}
+                  Модель object: 
+                        let data = {
+                              ClientId: 2,
+                              CleanerId: 3,
+                              Address: "адрес",
+                              Date: "01.01.1970",
+                              Time: "00:00",
+                              ServiceId: 4
+                         }
+                         
+      + DELETE-запрос: /orders/{order_id}
+
+2. Получение данных по **Услугам**
+
+      + GET-запросы: 
+      
+            1. Все услуги: /services
+            
+            2. Услуга по id: /services/{service_id}
+            
+      + POST-запросы: 
+      
+            1. Добавить новую услугу: /services       
+                  Модель object: 
+                        let data = {
+                              Name: "название"
+                         }
+
+      + PUT-запросы
+      
+            1. Редактировать услугу: /orders/{service_id}
+                  Модель object: 
+                  Модель object: 
+                        let data = {
+                              Name: "название"
+                         }
+                         
+      + DELETE-запрос: /services/{service_id}
+      
