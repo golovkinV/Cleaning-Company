@@ -26,7 +26,6 @@
                   Модель object: 
                         let data = {
                               ClientId: 2,
-                              CleanerId: 3,
                               Address: "адрес",
                               Date: "01.01.1970",
                               Time: "00:00",
