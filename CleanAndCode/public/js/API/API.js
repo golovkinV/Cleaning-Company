@@ -15,3 +15,26 @@ function sendRequest(type, url, data) {
         type === 'GET' ? request.send() : request.send(data);
     });
 }
+
+
+function insertTableRow(order) {
+    let row = '<tr> ' +
+        '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}` + '</td>' +
+        '<td class="font-weight-bold">' + `${order.Date}, ${order.Time}` + '</td>' +
+        '<td class="font-weight-bold">' + `${order.Condition.Name}` + '</td>' +
+        '<td>' +
+            '<a href="/edit/">' +
+                '<button class="btn btn-warning">Отменить заказ' +
+                '</button>' +
+            '</a>' +
+        '</td>' +
+        '<td>' +
+            '<a href="/remove/">' +
+                `<button class="btn btn-warning" onclick="removeOrder(${order.Id})">` +
+                    'Удалить заказ' +
+                '</button>' +
+            '</a>'
+        '</td>' +
+    '</tr>';
+    return row;
+}
