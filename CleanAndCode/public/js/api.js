@@ -1,32 +1,32 @@
-// sendRequest('GET', 'http://cleanandcode.somee.com/api/orders/19').then((res) => {
-//     console.log(JSON.parse(res));
-//     document.getElementById('loader').style.display = 'none';
-//     const div = document.getElementById('vovaLoh');
-//     div.innerHTML = div.innerHTML + JSON.parse(res).Address;
-// });
+const idClient = getDomElement('idOwner');
 
-
-// sendRequest('POST', 'http://cleanandcode.somee.com/api/orders', JSON.stringify(data)).then((res) => {
-//     console.log(JSON.parse(res));
-// });
-
-function getInputValue(idElement) {
-    return document.getElementById(idElement).value;
+function getDomElement(idElement) {
+    return document.getElementById(idElement);
 }
 
 function newOrder() {
-    let newOrder = {
-        ClientId: getInputValue('idOwner'),
+
+    const address = getDomElement('addressInput');
+    const category = getDomElement('category');
+    const date = getDomElement('date').value.split('T');
+
+    const newOrder = {
+        ClientId: idClient.value,
         CleanerId: -1,
-        Address: getInputValue('addressInput'),
+        Address: address.value,
         Date: "01.01.1970",
         Time: "00:00",
-        ServiceId: getInputValue('category'),
+        ServiceId: category.value,
         ConditionId: 4
     }
 
+    const loader = getDomElement('newOrderLoader');
+    loader.style.display = 'inline-block';
+
     sendRequest('POST', 'http://cleanandcode.somee.com/api/orders', JSON.stringify(newOrder)).then((result) => {
-        alert('Заявка оформлена');
+        address.value = "";
+        loader.style.display = 'none';
+        console.log('Заявка оформлена');
     });
 }
 
@@ -42,10 +42,28 @@ function selectBlock(idBlock)
     $('.blockHidden').hide();
     $( idBlock ).show();
 }
-selectBlock('#addCompany');
+//selectBlock('#addOrder');
 
 
 $(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
 
+function removeOrder(idOrder) {
+}
+
+function loadMyOrders() {
+    sendRequest('GET', 'http://cleanandcode.somee.com/api/orders/client_orders/' + idClient.value).then((result) => {
+        const myOrders = JSON.parse(result);
+        console.log(myOrders);
+        const table = getDomElement('myOrdersTable');
+        table.innerHTML = '';
+        myOrders.forEach((order) => {
+            table.innerHTML += insertTableRow(order);
+        });
+        
+
+
+    });
+}
+loadMyOrders();

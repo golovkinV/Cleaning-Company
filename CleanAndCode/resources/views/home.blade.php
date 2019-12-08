@@ -8,10 +8,10 @@
 @section('content')
     <div class="d-flex justify-content-center" style="margin: 20px">
         <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-            <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#addCompany')">
+            <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#newOrder')">
                 Оформить заказ
             </button>
-            <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#myCompany')">
+            <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#myOrders')">
                 Мои заказы
             </button>
         </div>
@@ -22,7 +22,7 @@
             <div class="d-flex text-white">
 
 
-                    <div class="p-2 flex-grow-1 bg-light blockHidden" id="addCompany" style="display: none">
+                    <div class="p-2 flex-grow-1 bg-light blockHidden" id="newOrder" style="display: none">
                             <div class="d-flex text-white justify-content-center" style="margin: 20px">
                                 <h3 class="text-dark">Оформление заказа</h3>
                             </div>
@@ -75,7 +75,7 @@
 
                                     <div class="form-group row">
                                         <label for="date" class="col-sm-2 col-form-label text-dark font-weight-bold">
-                                            Дата
+                                            Дата и время
                                         </label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" class="form-control{{ $errors->has('webSite') ? ' is-invalid' : '' }}"
@@ -89,7 +89,7 @@
                                             <button type="button" class="btn" style="background-color: #007acc; color: white"
                                                 onclick="newOrder()">
                                                 Оформить заявку
-                                                <div class="spinner-border text-light spinner-border-sm" role="status">
+                                                <div class="spinner-border text-light spinner-border-sm" role="status" id="newOrderLoader" style="display: none;">
                                                     <span class="sr-only">Loading...</span>
                                                   </div>
                                             </button>
@@ -101,7 +101,27 @@
                                 </form>
                             </div>
         
+                    </div>
+
+                    <div class="p-2 flex-grow-1 bg-light blockHidden" id="myOrders">
+                        <div class="d-flex text-white justify-content-center" style="margin: 20px">
+                            <h3 class="text-dark">Мои заказы</h3>
                         </div>
+                        <div class="d-flex text-white justify-content-center" style="margin: 20px">
+                            <table class="table" style="width: 85%">
+                                <thead>
+                                    <tr>
+                                      <th>Адрес</th>
+                                      <th>Дата уборки</th>
+                                      <th>Статус заказа</th>
+                                      <th></th>
+                                      <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myOrdersTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
 
             </div>
         </div>
