@@ -1,5 +1,5 @@
 @push('scripts')
-    <script src="js/home.js"></script>
+    <script src="js/cleaner.js"></script>
 @endpush
 
 
@@ -8,8 +8,8 @@
 @section('content')
     <div class="d-flex justify-content-center" style="margin: 20px">
         <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-            <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#newOrder')">
-                Оформить заказ
+            <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#cleanerOrders')">
+                Мои заказы
             </button>
             <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#myOrders')">
                 Мои заказы
@@ -22,9 +22,9 @@
             <div class="d-flex text-white">
 
 
-                    <div class="p-2 flex-grow-1 bg-light blockHidden" id="newOrder" style="display: none">
+                    <div class="p-2 flex-grow-1 bg-light blockHidden" id="cleanerOrders" style="display: none">
                             <div class="d-flex text-white justify-content-center" style="margin: 20px">
-                                <h3 class="text-dark">Оформление заказа</h3>
+                                <h3 class="text-dark">Мои заказы</h3>
                             </div>
                             <div class="d-flex text-white justify-content-center" style="margin: 20px">
                                 <form class="w-75" method="POST" action="" enctype="multipart/form-data">
