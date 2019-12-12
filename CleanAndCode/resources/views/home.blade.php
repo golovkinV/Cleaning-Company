@@ -35,6 +35,16 @@
                                             <input id="idOwner"  name="idOwner" type="text" value="{{Auth::user()->id}}" required>
                                         </div>
                                     </div>
+                                    <div hidden>
+                                        <div>
+                                            <input id="userName"  name="userName" type="text" value="{{Auth::user()->name}}" required>
+                                        </div>
+                                    </div>
+                                    <div hidden>
+                                            <div>
+                                                <input id="userEmail"  name="userEmail" type="text" value="{{Auth::user()->email}}" required>
+                                            </div>
+                                        </div>
                                     <!-- КОНЕЦ СКРЫТОЙ ЧАСТИ -->
         
                                     <div class="form-group row">
@@ -75,14 +85,25 @@
 
                                     <div class="form-group row">
                                         <label for="date" class="col-sm-2 col-form-label text-dark font-weight-bold">
-                                            Дата и время
+                                            Дата
                                         </label>
                                         <div class="col-sm-10">
-                                            <input type="datetime-local" class="form-control{{ $errors->has('webSite') ? ' is-invalid' : '' }}"
+                                            <input type="date" class="form-control{{ $errors->has('webSite') ? ' is-invalid' : '' }}"
                                                     id="date" name="date"
                                             >
                                         </div>
                                     </div>
+
+                                    <div class="form-group row">
+                                            <label for="time" class="col-sm-2 col-form-label text-dark font-weight-bold">
+                                                Время
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="time" class="form-control{{ $errors->has('webSite') ? ' is-invalid' : '' }}"
+                                                        id="time" name="time" min="08:00" max="19:00" required
+                                                >
+                                            </div>
+                                        </div>
 
                                     <div class="form-group row">
                                         <div class="col-sm-10 offset-sm-2">
