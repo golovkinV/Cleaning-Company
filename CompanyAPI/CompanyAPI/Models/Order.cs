@@ -13,7 +13,7 @@ namespace CompanyAPI.Models
         public string Address { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
-
+        public int Evaluation { get; set; }
         public int ServiceId { get; set; }
         public Service Service { get; set; }
 
