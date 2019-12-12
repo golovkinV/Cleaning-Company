@@ -54,6 +54,7 @@ function removeOrder(idOrder) {
 /**
  * @function loadMyOrders
  * @description Метод, который загрузит список заказов пользователя
+ * @param
  * @returns {void}
  */
 function loadMyOrders() {
