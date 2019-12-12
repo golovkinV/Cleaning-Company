@@ -1,3 +1,4 @@
+const apiUrl = `http://cleanandcode.somee.com/api`;
 const idClient = getDomElement('idOwner');
 
 function getDomElement(idElement) {
@@ -23,7 +24,7 @@ function newOrder() {
     const loader = getDomElement('newOrderLoader');
     loader.style.display = 'inline-block';
 
-    sendRequest('POST', 'http://cleanandcode.somee.com/api/orders', JSON.stringify(newOrder)).then((result) => {
+    sendRequest('POST', `${apiUrl}/orders`, JSON.stringify(newOrder)).then((result) => {
         address.value = "";
         loader.style.display = 'none';
         console.log('Заявка оформлена');
@@ -54,11 +55,10 @@ function removeOrder(idOrder) {
 /**
  * @function loadMyOrders
  * @description Метод, который загрузит список заказов пользователя
- * @param
  * @returns {void}
  */
 function loadMyOrders() {
-    sendRequest('GET', 'http://cleanandcode.somee.com/api/orders/client_orders/' + idClient.value).then((result) => {
+    sendRequest('GET', `${apiUrl}/orders/client_orders/${idClient.value}`).then((result) => {
         const myOrders = JSON.parse(result);
         console.log(myOrders);
         const table = getDomElement('myOrdersTable');
@@ -83,7 +83,7 @@ function removeOrder(idOrder) {
 
     const confirm = window.confirm('Вы действительно хотите удалить заказ? Это действие отменить невозможно!');
     if (confirm) {
-        sendRequest('DELETE', `http://cleanandcode.somee.com/api/orders/${idOrder}`).then(() => {
+        sendRequest('DELETE', `${apiUrl}/orders/${idOrder}`).then(() => {
             loadMyOrders();
         });
     }    
@@ -103,10 +103,11 @@ function editOrder(idOrder) {
 
     const confirm = window.confirm('Вы действительно хотите отменить заказ?');
     if (confirm) {
-        sendRequest('GET', `http://cleanandcode.somee.com/api/orders/${idOrder}`).then((order) => {
+        sendRequest('GET', `${apiUrl}/orders/${idOrder}`).then((order) => {
             const changedOrder = { ...JSON.parse(order) };
             changedOrder.ConditionId = 1;
-            sendRequest('PUT', `http://cleanandcode.somee.com/api/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
+            changedOrder.Condition.Id = 1;
+            sendRequest('PUT', `${apiUrl}/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
                 console.log(order);
                 loadMyOrders();
             });
