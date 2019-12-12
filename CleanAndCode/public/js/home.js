@@ -21,14 +21,15 @@ function newOrder() {
 
     const address = getDomElement('addressInput');
     const category = getDomElement('category');
-    const date = getDomElement('date').value.split('T');
+    const date = getDomElement('date').value;
+    const time = getDomElement('time').value;
 
     const newOrder = {
         ClientId: idClient.value,
         CleanerId: -1,
         Address: address.value,
-        Date: date[0],
-        Time: date[1],
+        Date: date,
+        Time: time,
         ServiceId: category.value,
         ConditionId: 4
     }
@@ -40,6 +41,13 @@ function newOrder() {
         address.value = "";
         loader.style.display = 'none';
         console.log('Заявка оформлена');
+        const email = {
+            ClientName: getDomElement('userName').value,
+            Email: 'vladimir.golovkin16@yandex.ru', //getDomElement('userEmail').value,
+            Date: date,
+            Time: time,
+        }
+        sendRequest('POST', `${apiUrl}/email`, JSON.stringify(email));
         loadMyOrders();
     });
 }
