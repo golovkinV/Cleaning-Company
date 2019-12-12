@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/cleaner', 'HomeController@cleaner')->name('cleaner');
 
 Route::get('/editProfile', 'HomeController@goToEditProfile');
 

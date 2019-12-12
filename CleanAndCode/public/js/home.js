@@ -1,10 +1,22 @@
 const apiUrl = `http://cleanandcode.somee.com/api`;
-const idClient = getDomElement('idOwner');
+let idClient = '';
 
+
+/**
+ * @function getDomElement
+ * @description Метод, который вернет ссылку на DOM-элемент
+ * @returns {void}
+ */
 function getDomElement(idElement) {
     return document.getElementById(idElement);
 }
 
+
+/**
+ * @function newOrder
+ * @description Метод, который добавит новый заказ
+ * @returns {void}
+ */
 function newOrder() {
 
     const address = getDomElement('addressInput');
@@ -28,29 +40,10 @@ function newOrder() {
         address.value = "";
         loader.style.display = 'none';
         console.log('Заявка оформлена');
+        loadMyOrders();
     });
 }
 
-function selectBlock(idBlock)
-{
-    $('.blockHidden').hide();
-    $( idBlock ).show();
-}
-
-function selectBlock(idBlock)
-{
-    $('.blockHidden').hide();
-    $( idBlock ).show();
-}
-//selectBlock('#addOrder');
-
-
-$(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-function removeOrder(idOrder) {
-}
 
 /**
  * @function loadMyOrders
@@ -60,12 +53,17 @@ function removeOrder(idOrder) {
 function loadMyOrders() {
     sendRequest('GET', `${apiUrl}/orders/client_orders/${idClient.value}`).then((result) => {
         const myOrders = JSON.parse(result);
-        console.log(myOrders);
         const table = getDomElement('myOrdersTable');
-        table.innerHTML = '';
-        myOrders.forEach((order) => {
-            table.innerHTML += insertTableRow(order);
-        });
+        if (myOrders.length) {
+           console.log(myOrders);
+            table.innerHTML = '';
+            myOrders.forEach((order) => {
+                table.innerHTML += insertTableRow(order);
+            }); 
+        } else {
+            table.innerHTML += 'У Вас еще нет заказов';
+        }
+        
     });
 }
 
@@ -116,5 +114,11 @@ function editOrder(idOrder) {
     }    
 }
 
-
-loadMyOrders();
+/**
+ * @description Событие, которое вызовет загрузку данных по готовности страницы
+ * @returns {void}
+ */
+document.addEventListener("DOMContentLoaded", function(event) { 
+    idClient = getDomElement('idOwner');
+    loadMyOrders();
+  });

@@ -48,3 +48,15 @@ function insertTableRow(order) {
     '</tr>';
     return row;
 }
+
+function selectBlock(idBlock)
+{
+    $('.blockHidden').hide();
+    $( idBlock ).show();
+}
+
+function selectBlock(idBlock)
+{
+    $('.blockHidden').hide();
+    $( idBlock ).show();
+}
