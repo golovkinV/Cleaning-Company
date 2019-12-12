@@ -14,8 +14,8 @@ function newOrder() {
         ClientId: idClient.value,
         CleanerId: -1,
         Address: address.value,
-        Date: "01.01.1970",
-        Time: "00:00",
+        Date: date[0],
+        Time: date[1],
         ServiceId: category.value,
         ConditionId: 4
     }
@@ -29,7 +29,6 @@ function newOrder() {
         console.log('Заявка оформлена');
     });
 }
-
 
 function selectBlock(idBlock)
 {
@@ -52,6 +51,11 @@ $(function(){
 function removeOrder(idOrder) {
 }
 
+/**
+ * @function loadMyOrders
+ * @description Метод, который загрузит список заказов пользователя
+ * @returns {void}
+ */
 function loadMyOrders() {
     sendRequest('GET', 'http://cleanandcode.somee.com/api/orders/client_orders/' + idClient.value).then((result) => {
         const myOrders = JSON.parse(result);
@@ -61,9 +65,54 @@ function loadMyOrders() {
         myOrders.forEach((order) => {
             table.innerHTML += insertTableRow(order);
         });
-        
-
-
     });
 }
+
+
+/**
+ * @function removeOrder
+ * @description Метод, который удалит заказ из БД
+ * @param {number} idOrder
+ * @returns {void}
+ */
+function removeOrder(idOrder) {
+    if (!idOrder) {
+        return;
+    }
+
+    const confirm = window.confirm('Вы действительно хотите удалить заказ? Это действие отменить невозможно!');
+    if (confirm) {
+        sendRequest('DELETE', `http://cleanandcode.somee.com/api/orders/${idOrder}`).then(() => {
+            loadMyOrders();
+        });
+    }    
+}
+
+
+/**
+ * @function editOrder
+ * @description Метод, который обновит данные заказа
+ * @param {number} idOrder
+ * @returns {void}
+ */
+function editOrder(idOrder) {
+    if (!idOrder) {
+        return;
+    }
+
+    const confirm = window.confirm('Вы действительно хотите отменить заказ?');
+    if (confirm) {
+        sendRequest('GET', `http://cleanandcode.somee.com/api/orders/${idOrder}`).then((order) => {
+            const changedOrder = { ...JSON.parse(order) };
+            changedOrder.ConditionId = 1;
+            sendRequest('PUT', `http://cleanandcode.somee.com/api/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
+                console.log(order);
+                loadMyOrders();
+            });
+        });
+        
+    }    
+}
+
+
 loadMyOrders();
