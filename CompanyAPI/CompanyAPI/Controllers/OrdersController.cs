@@ -57,6 +57,29 @@ namespace CompanyAPI.Controllers
             return orders;
         }
 
+        [HttpGet]
+        [Route("end_orders")]
+        public IQueryable<Order> AllEndOrders()
+        {
+            var orders = db.Orders
+                .Where(o => o.ConditionId == 3)
+                .Include(o => o.Service)
+                .Include(o => o.Condition);
+
+            return orders;
+        }
+
+        [HttpGet]
+        [Route("good_orders")]
+        public IQueryable<Order> AllGoogOrders() {
+            var orders = db.Orders
+                .Where(o => o.ConditionId == 2)
+                .Include(o => o.Service)
+                .Include(o => o.Condition);
+
+            return orders;
+        }
+
         // GET: api/orders/cleaner_orders/1
         [HttpGet]
         [Route("cleaner_orders/{cleaner_id}")]
