@@ -27,6 +27,14 @@ function sendRequest(type, url, data) {
     });
 }
 
+
+const ConditionsEnum = {
+    Canceled: { id: 1},
+    Confirmed: { id: 2, Url: '/orders/good_orders'},
+    Completed: { id: 3, Url: '/orders/end_orders' },
+    NotConfirmed: { id: 4, Url: '/orders/manager_orders'},
+}
+
 /**
  * @function getDomElement
  * @description Метод, который вернет ссылку на DOM-элемент
