@@ -100,7 +100,7 @@ function insertTableRow(order) {
     const condition = order.ConditionId === 1 ? `Отменен` : `Отменить заказ`;
 
     let row = '<tr> ' +
-        '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}` + '</td>' +
+        '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}, ${order.Service.Cost}₽` + '</td>' +
         '<td class="font-weight-bold">' + `${order.Date}, ${order.Time}` + '</td>' +
         '<td class="font-weight-bold">' + `${order.Condition.Name}` + '</td>' +
         '<td>' +

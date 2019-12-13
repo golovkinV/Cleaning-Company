@@ -76,9 +76,9 @@
                                         <div class="col-sm-10">
                                             <select сlass="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}"
                                                     id="category" name="category" placeholder="Категория">
-                                                    <option value="1">Комната</option>
-                                                    <option value="2">Квартира</option>
-                                                    <option value="3">Дом</option>
+                                                    <option value="1">Комната, 3000₽</option>
+                                                    <option value="2">Квартира, 5000₽</option>
+                                                    <option value="3">Дом, 7000₽</option>
                                             </select>
                                         </div>
                                     </div>

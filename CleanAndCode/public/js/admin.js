@@ -12,13 +12,19 @@ function loadAllTables() {
     loadManagerOrders(ConditionsEnum.Completed.Url, 'managerCompletedTableOrders');
 }
 
+/**
+ * @function loadManagerOrders
+ * @description Метод, который загрузит таблицу
+ * @param {number} idOrder
+ * @returns {void}
+ */
 function loadManagerOrders(request, idTable) {
     sendRequest('GET', `${apiUrl}${request}`).then((result) => {
         const myOrders = JSON.parse(result);
         const table = getDomElement(idTable);
+        table.innerHTML = '';
         if (myOrders.length) {
            console.log(myOrders);
-            table.innerHTML = '';
             myOrders.forEach((order) => {
                 table.innerHTML += insertTableRow(order);
             }); 
@@ -74,7 +80,7 @@ function insertTableRow(order) {
     }
 
     let row = '<tr> ' +
-        '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}` + '</td>' +
+        '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}, ${order.Service.Cost}₽` + '</td>' +
         '<td class="font-weight-bold">' + `${order.Date}, ${order.Time}` + '</td>' +
         '<td class="font-weight-bold">' + `${order.Condition.Name}` + '</td>' +
         tableOperations +
@@ -118,8 +124,8 @@ function changeConditionalOrder(idOrder, condition) {
     if (confirm) {
         sendRequest('GET', `${apiUrl}/orders/${idOrder}`).then((order) => {
             const changedOrder = { ...JSON.parse(order) };
-            changedOrder.ConditionId = ConditionsEnum[condition].Id;
-            changedOrder.Condition.Id = ConditionsEnum[condition],Id;
+            changedOrder.ConditionId = ConditionsEnum[condition].id;
+            changedOrder.Condition.Id = ConditionsEnum[condition].id;
             sendRequest('PUT', `${apiUrl}/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
                 loadAllTables();
             });
