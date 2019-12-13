@@ -48,14 +48,19 @@ function insertTableRow(order) {
                 `<button class="btn" style="background-color: #2a69af; color: white" onclick="changeConditionalOrder(${order.Id}, 'Confirmed')">` +
                     'Принять заказ' +
                 '</button>' +
+            '</td>',
+        completed:
+            '<td>' +
+                `<button class="btn" style="background-color: #2a69af; color: white" onclick="changeConditionalOrder(${order.Id}, 'Completed')">` +
+                    'Завершить заказ' +
+                '</button>' +
             '</td>'
-
     };
 
-    let tableOperations;
+    let tableOperations = '';
     switch(condition) {
         case 2:
-            tableOperations = actions.confirm;
+            tableOperations = actions.confirm + actions.completed;
             break;
     }
 
@@ -85,6 +90,8 @@ function changeConditionalOrder(idOrder, condition) {
         sendRequest('GET', `${apiUrl}/orders/${idOrder}`).then((order) => {
             const changedOrder = { ...JSON.parse(order) };
             changedOrder.CleanerId = idCleaner;
+            changedOrder.ConditionId = ConditionsEnum[condition].id;
+            changedOrder.Condition.Id = ConditionsEnum[condition].id;
             sendRequest('PUT', `${apiUrl}/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
                 loadAllTables();
             });

@@ -66,24 +66,49 @@ function loadMyOrders() {
 }
 
 /**
- * @function editOrder
+ * @function changeConditionalOrder
  * @description Метод, который обновит данные заказа
  * @param {number} idOrder
+ * @param {number} condition
  * @returns {void}
  */
-function editOrder(idOrder) {
+function changeConditionalOrder(idOrder, condition) {
     if (!idOrder) {
         return;
     }
 
-    const confirm = window.confirm('Вы действительно хотите отменить заказ?');
+    const confirm = window.confirm('Изменить статус заказа?');
     if (confirm) {
         sendRequest('GET', `${apiUrl}/orders/${idOrder}`).then((order) => {
             const changedOrder = { ...JSON.parse(order) };
-            changedOrder.ConditionId = 1;
-            changedOrder.Condition.Id = 1;
+            changedOrder.ConditionId = ConditionsEnum[condition].id;
+            changedOrder.Condition.Id = ConditionsEnum[condition].id;
             sendRequest('PUT', `${apiUrl}/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
-                console.log(order);
+                loadAllTables();
+            });
+        });
+        
+    }    
+}
+
+
+/**
+ * @function setRatingOrder
+ * @description Метод, который обновит данные заказа
+ * @param {number} idOrder
+ * @returns {void}
+ */
+function setRatingOrder(idOrder) {
+    if (!idOrder) {
+        return;
+    }
+
+    const confirm = window.confirm('Изменить оценку заказа?');
+    if (confirm) {
+        sendRequest('GET', `${apiUrl}/orders/${idOrder}`).then((order) => {
+            const changedOrder = { ...JSON.parse(order) };
+            changedOrder.Evaluation = getDomElement('ratingOrder').value;
+            sendRequest('PUT', `${apiUrl}/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
                 loadMyOrders();
             });
         });
@@ -91,23 +116,56 @@ function editOrder(idOrder) {
     }    
 }
 
+
 /**
  * @description Метод рендера таблицы заказов пользователя
  * @returns {void}
  */
 function insertTableRow(order) {
 
-    const condition = order.ConditionId === 1 ? `Отменен` : `Отменить заказ`;
+    const condition = order.ConditionId;
+
+    const actions = {
+        cancel:
+            '<td>' +
+                `<button class="btn btn-warning" onclick="changeConditionalOrder(${order.Id}, 'Canceled')" style="width: 100%">Отменить заказ</button>` +
+            '</td>',
+        rating:
+            '<td>' +
+                `<button class="btn btn-warning" onclick="setRatingOrder(${order.Id})" style="width: 100%">Оценить заказ</button>` +
+            '</td>',
+        mark:
+            '<td>' +
+                `<select сlass="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}"` +
+                `id="ratingOrder" name="ratingOrder"> style="width="width: 30px"`+
+                `<option value="1">✩</option>`+
+                `<option value="2">✩✩</option>`+
+                `<option value="3">✩✩✩</option>`+
+                `<option value="4">✩✩✩✩</option>`+
+                `<option value="5">✩✩✩✩✩</option>`+
+                `</select>`+
+            '</td>',
+    };
+
+    let tableOperations = '';
+    switch(condition) {
+        case 2:
+            tableOperations = actions.cancel;
+            break;
+        case 3:
+            tableOperations = (order.Evaluation === 0 ? actions.rating + actions.mark : '');
+            break;
+        case 4:
+            tableOperations = actions.cancel;
+            break;
+    }
 
     let row = '<tr> ' +
         '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}, ${order.Service.Cost}₽` + '</td>' +
         '<td class="font-weight-bold">' + `${order.Date}, ${order.Time}` + '</td>' +
         '<td class="font-weight-bold">' + `${order.Condition.Name}` + '</td>' +
-        '<td>' +
-                `<button class="btn btn-${order.ConditionId === 1 ? `secondary` : `warning` }" onclick="editOrder(${order.Id})" style="width: 100%">${condition}</button>` +
-                '</button>' +
-        '</td>' +
-    '</tr>';
+        tableOperations +
+        '</tr>';
     return row;
 }
 
