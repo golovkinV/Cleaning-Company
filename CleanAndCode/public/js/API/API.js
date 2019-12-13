@@ -27,26 +27,13 @@ function sendRequest(type, url, data) {
     });
 }
 
-
-function insertTableRow(order) {
-
-    const condition = order.ConditionId === 1 ? `Отменен` : `Отменить заказ`;
-
-    let row = '<tr> ' +
-        '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}` + '</td>' +
-        '<td class="font-weight-bold">' + `${order.Date}, ${order.Time}` + '</td>' +
-        '<td class="font-weight-bold">' + `${order.Condition.Name}` + '</td>' +
-        '<td>' +
-                `<button class="btn btn-${order.ConditionId === 1 ? `secondary` : `warning` }" onclick="editOrder(${order.Id})" style="width: 100%">${condition}</button>` +
-                '</button>' +
-        '</td>' +
-        '<td>' +
-                `<button class="btn btn-warning" onclick="removeOrder(${order.Id})">` +
-                    'Удалить заказ' +
-                '</button>' +
-        '</td>' +
-    '</tr>';
-    return row;
+/**
+ * @function getDomElement
+ * @description Метод, который вернет ссылку на DOM-элемент
+ * @returns {void}
+ */
+function getDomElement(idElement) {
+    return document.getElementById(idElement);
 }
 
 function selectBlock(idBlock)

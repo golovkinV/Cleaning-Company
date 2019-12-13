@@ -3,16 +3,6 @@ let idClient = '';
 
 
 /**
- * @function getDomElement
- * @description Метод, который вернет ссылку на DOM-элемент
- * @returns {void}
- */
-function getDomElement(idElement) {
-    return document.getElementById(idElement);
-}
-
-
-/**
  * @function newOrder
  * @description Метод, который добавит новый заказ
  * @returns {void}
@@ -75,27 +65,6 @@ function loadMyOrders() {
     });
 }
 
-
-/**
- * @function removeOrder
- * @description Метод, который удалит заказ из БД
- * @param {number} idOrder
- * @returns {void}
- */
-function removeOrder(idOrder) {
-    if (!idOrder) {
-        return;
-    }
-
-    const confirm = window.confirm('Вы действительно хотите удалить заказ? Это действие отменить невозможно!');
-    if (confirm) {
-        sendRequest('DELETE', `${apiUrl}/orders/${idOrder}`).then(() => {
-            loadMyOrders();
-        });
-    }    
-}
-
-
 /**
  * @function editOrder
  * @description Метод, который обновит данные заказа
@@ -120,6 +89,26 @@ function editOrder(idOrder) {
         });
         
     }    
+}
+
+/**
+ * @description Метод рендера таблицы заказов пользователя
+ * @returns {void}
+ */
+function insertTableRow(order) {
+
+    const condition = order.ConditionId === 1 ? `Отменен` : `Отменить заказ`;
+
+    let row = '<tr> ' +
+        '<td class="font-weight-bold">' + `${order.Address}, ${order.Service.Name}` + '</td>' +
+        '<td class="font-weight-bold">' + `${order.Date}, ${order.Time}` + '</td>' +
+        '<td class="font-weight-bold">' + `${order.Condition.Name}` + '</td>' +
+        '<td>' +
+                `<button class="btn btn-${order.ConditionId === 1 ? `secondary` : `warning` }" onclick="editOrder(${order.Id})" style="width: 100%">${condition}</button>` +
+                '</button>' +
+        '</td>' +
+    '</tr>';
+    return row;
 }
 
 /**
