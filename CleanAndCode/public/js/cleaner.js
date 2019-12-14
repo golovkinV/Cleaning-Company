@@ -45,7 +45,7 @@ function insertTableRow(order) {
     const actions = {
         confirm: 
             '<td>' +
-                `<button class="btn" style="background-color: #2a69af; color: white" onclick="changeConditionalOrder(${order.Id}, 'Confirmed')">` +
+                `<button class="btn" style="background-color: #2a69af; color: white" onclick="changeConditionalOrder(${order.Id}, 'Accepted')">` +
                     'Принять заказ' +
                 '</button>' +
             '</td>',
@@ -60,7 +60,10 @@ function insertTableRow(order) {
     let tableOperations = '';
     switch(condition) {
         case 2:
-            tableOperations = actions.confirm + actions.completed;
+            tableOperations = actions.confirm;
+            break;
+        case 6:
+            tableOperations = actions.completed;
             break;
     }
 

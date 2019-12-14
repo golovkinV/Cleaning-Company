@@ -16,7 +16,7 @@
             </button>
             <button type="button" class="btn" style="background-color: #007acc; color: white;" onclick="selectBlock('#managerCompletedOrders')">
                     Завершенные заказы
-                </button>
+            </button>
         </div>
     </div>
 

@@ -33,6 +33,7 @@ const ConditionsEnum = {
     Confirmed: { id: 2, Url: '/orders/good_orders'},
     Completed: { id: 3, Url: '/orders/end_orders' },
     NotConfirmed: { id: 4, Url: '/orders/manager_orders'},
+    Accepted: { id: 6 }
 }
 
 /**

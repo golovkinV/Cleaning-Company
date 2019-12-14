@@ -20,20 +20,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="">Категории <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="">Компании</a>
-                </li>
                 @if(Auth::user()->isAdmin == 1)
                     <li class="nav-item active">
                         <a class="nav-link" href="http://localhost/phpmyadmin" target="_blank">Управление БД</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/newCleaner" target="_blank">Добавить аккаунт уборщика</a>
+                    </li>
                 @endif
             </ul>
             <form class="form-inline mt-2 mt-md-0" style="margin-right: 50px" method="post" action="">
-                <input class="form-control mr-sm-2" type="text" placeholder="Поиск компании" aria-label="Search" name="searchInput2" required>
+                <input class="form-control mr-sm-2" type="text" placeholder="Поиск заказа" aria-label="Search" name="searchInput2" required>
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
                 {{ csrf_field() }}
             </form>
