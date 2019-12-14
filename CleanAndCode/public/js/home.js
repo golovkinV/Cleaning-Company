@@ -14,6 +14,11 @@ function newOrder() {
     const date = getDomElement('date').value;
     const time = getDomElement('time').value;
 
+    if (!address.value || !category || !date || !time) {
+        alert('Не все данные заполнены');
+        return;
+    }
+
     const newOrder = {
         ClientId: idClient.value,
         CleanerId: -1,
@@ -84,7 +89,7 @@ function changeConditionalOrder(idOrder, condition) {
             changedOrder.ConditionId = ConditionsEnum[condition].id;
             changedOrder.Condition.Id = ConditionsEnum[condition].id;
             sendRequest('PUT', `${apiUrl}/orders/${changedOrder.Id}`, JSON.stringify(changedOrder)).then((order) => {
-                loadAllTables();
+                loadMyOrders();
             });
         });
         

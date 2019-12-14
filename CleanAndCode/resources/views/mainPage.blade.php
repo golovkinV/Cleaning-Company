@@ -77,7 +77,7 @@
             </div>
             <div class="card-header">
                 <div class="d-flex text-black justify-content-center">
-                    <a href="">
+                    <a href="/home">
                         <button class="btn" style="color: #2a69af">Заказать &#8250;</button>
 
                     </a>
@@ -96,7 +96,7 @@
             </div>
             <div class="card-header">
                 <div class="d-flex text-black justify-content-center">
-                    <a href="">
+                    <a href="/home">
                         <button class="btn" style="color: #2a69af">Заказать &#8250;</button>
 
                     </a>
@@ -115,7 +115,7 @@
             </div>
             <div class="card-header">
                 <div class="d-flex text-black justify-content-center">
-                    <a href="">
+                    <a href="/home">
                         <button class="btn" style="color: #2a69af">Заказать &#8250;</button>
 
                     </a>
