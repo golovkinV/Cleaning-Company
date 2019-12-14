@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/cleaner', 'HomeController@cleaner')->name('cleaner');
 
+Route::get('/newCleaner', 'HomeController@newcleaner');
+Route::post('/newCleaner', 'HomeController@addNewCleaner')->name('addNewCleaner');
+
 Route::get('/admin', 'HomeController@admin')->name('admin');
 
 Route::get('/editProfile', 'HomeController@goToEditProfile');

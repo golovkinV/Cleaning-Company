@@ -33,7 +33,7 @@ function newOrder() {
         console.log('Заявка оформлена');
         const email = {
             ClientName: getDomElement('userName').value,
-            Email: 'vladimir.golovkin16@yandex.ru', //getDomElement('userEmail').value,
+            Email: 'aleksandr7211@gmail.com', //getDomElement('userEmail').value,
             Date: date,
             Time: time,
         }

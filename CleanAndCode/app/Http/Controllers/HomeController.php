@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use app\User;
 
 class HomeController extends Controller
 {
@@ -36,6 +37,11 @@ class HomeController extends Controller
         return view('admin');
     }
 
+    public function newCleaner()
+    {
+        return view('newCleaner');
+    }
+
     public function goToEditProfile()
     {
         return view('editProfile');
@@ -46,6 +52,13 @@ class HomeController extends Controller
         User::where('id', Auth::user()->id)
             ->update(['email' => $request['email'],
                     'name' => $request['name']]);
+        return redirect('/home');
+    }
+
+    public function addNewCleaner(Request $request)
+    {
+        User::where('email', $request['email'])
+            ->update(['isAdmin' => 2]);
         return redirect('/home');
     }
 
