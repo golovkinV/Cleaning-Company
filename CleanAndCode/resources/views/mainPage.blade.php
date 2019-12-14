@@ -55,7 +55,7 @@
     </div>
 
     <div class="d-flex text-black justify-content-center" style="margin-top: 10px;">
-        <h2>Чистка мозгов - почистим нежно <span class="badge badge-secondary">* с мылом</span></h2>
+        <h2>Тюменская клиниговая компания - уберем все до пылинки<span class="badge badge-secondary">* с мылом</span></h2>
     </div>
     
     <div class="d-flex text-black justify-content-center">
@@ -123,12 +123,4 @@
             </div>
         </div>
     </div>
-
-
-    <div id="vovaLoh" style="display: flex; width: 500px; height: 500px; background-color: #f4c985; padding-top:100px; padding-left: 100px">
-        <div class="spinner-border text-primary" role="status" id="loader">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-
 @endsection
