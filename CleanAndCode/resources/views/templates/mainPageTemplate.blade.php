@@ -23,7 +23,7 @@
 <body class="bg-light">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #2a69af">
-        <a class="navbar-brand" href="/">Чистка мозгов</a>
+        <a class="navbar-brand" href="/">Тюменская клиниговая компания</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

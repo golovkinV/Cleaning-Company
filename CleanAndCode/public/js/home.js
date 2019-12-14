@@ -42,7 +42,9 @@ function newOrder() {
             Date: date,
             Time: time,
         }
-        sendRequest('POST', `${apiUrl}/email`, JSON.stringify(email));
+        sendRequest('POST', `${apiUrl}/email`, JSON.stringify(email)).then((res) => {
+            console.log(res);
+        });
         loadMyOrders();
     });
 }
@@ -64,7 +66,7 @@ function loadMyOrders() {
                 table.innerHTML += insertTableRow(order);
             }); 
         } else {
-            table.innerHTML += 'У Вас еще нет заказов';
+            table.innerHTML += '<td><div class="d-flex text-black justify-content-start font-weight-bold" style="margin-top:20px">У Вас еще нет заказов</div></td>';
         }
         
     });

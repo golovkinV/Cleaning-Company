@@ -28,7 +28,7 @@ function loadManagerOrders(request, idTable) {
                 table.innerHTML += insertTableRow(order);
             }); 
         } else {
-            table.innerHTML += 'У Вас еще нет заказов';
+            table.innerHTML += '<td><div class="d-flex text-black justify-content-start font-weight-bold" style="margin-top:20px">У Вас еще нет заказов</div></td>';
         }
         
     });
