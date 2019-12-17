@@ -42,7 +42,8 @@
                               Address: "адрес",
                               Date: "01.01.1970",
                               Time: "00:00",
-                              ServiceId: 4
+                              ServiceId: 4,
+                              Condition: 4
                          }
                          
       + DELETE-запрос: **/orders/{order_id}**
